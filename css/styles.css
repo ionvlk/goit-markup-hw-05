@@ -49,7 +49,7 @@ body {
     color: var(--textcolor);
 }
 
-header {
+header { 
     border-bottom: 1px solid #ECECEC;
 }
 
@@ -100,14 +100,32 @@ header .logo {
 .site-nav .link.current {
     color: var(--hovactcolor);
 }
+.site-nav .link.current::after {
+    opacity: 1;
+}
+
+.site-nav .link::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--hovactcolor);
+    border-radius: 2px;
+    opacity: 0;
+}
     
 .site-nav .link {
-
+    position: relative;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.14;
     letter-spacing: 0.02em;
     color: var(--titlecolor);
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .site-nav .link:hover,
 .site-nav .link:focus {
@@ -129,7 +147,8 @@ header .logo {
     display: block;
     padding-top: 32px;
     padding-bottom: 32px;
-   /* outline: 1px solid green;*/
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .site-nav .item:not(:last-child) {
@@ -153,6 +172,9 @@ header .logo {
     line-height: 1.14;
     letter-spacing: 0.02em;
     color: var(--textcolor);
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .site-contacts .link:hover,
@@ -166,6 +188,8 @@ header .logo {
 }
 .conection {
     margin-right: 10px;
+
+    transition: fill cubic-bezier(0.4, 0, 0.2, 1);
 }
 /*hero*/
 .hero {
@@ -204,6 +228,9 @@ header .logo {
     line-height: 1.88;
     cursor: pointer;
     align-items: center;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button:hover,
@@ -299,6 +326,33 @@ header .logo {
 .work .item:nth-child(3n) {
     margin-right: 0px;
 }
+.work>.item {
+    position: relative;
+}
+
+.work-description {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 70px;
+    background: rgba(47, 48, 58, 0.8);
+   
+}
+
+.work-description .text {
+    margin: 0;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.14;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--background);  
+}
 
 /*team list*/
 
@@ -385,6 +439,8 @@ header .logo {
     justify-content: center;
     width: 44px;
     height: 44px;
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     /*filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));;*/
     
 }
@@ -393,6 +449,8 @@ header .logo {
     fill: var(--socialsymbol);
     width: 20px;
     height: 20px;
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-link:hover,
@@ -429,6 +487,8 @@ header .logo {
     height: 92px;
     border: 1px solid var(--socialsymbol);
     border-radius: 4px;
+
+    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .banner:hover,
@@ -443,6 +503,8 @@ header .logo {
 
 .banner .icon {
     fill: var(--socialsymbol);
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logo-company:last-child {
@@ -498,6 +560,63 @@ header .logo {
     font-size: 14px;
     line-height: 1.71;
     letter-spacing: 0.03em;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);;
+    opacity: 1;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    min-width: 528px;
+    min-height: 581px;
+
+    background: var(--background);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;   
+}
+
+.close {
+    display: block;
+}
+
+.modal-close {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--background);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+
 }
 
 /*PORTFOLIO.html*/
@@ -511,16 +630,22 @@ header .logo {
     display: inline;
     border-radius: 4px;
     padding: 6px 22px;
+    text-align: center;
 
     color: var(--titlecolor);
     background-color: var(--rectanglecolor);
+
     font-family: inherit;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.62;
     letter-spacing: 0.03em;
     cursor: pointer;
-    text-align: center;
+    border: none;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filter {
@@ -554,6 +679,8 @@ header .logo {
     background-color: var(--background);
     /*outline: 2px solid red;*/
     border: 1px solid #EEEEEE;
+
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .work-exaple .item:hover,
@@ -564,6 +691,40 @@ header .logo {
 .item .photo-example {
     display: block;
     max-width: 100%;
+}
+.box {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    
+}
+.box-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(33, 150, 243, 0.9);;
+
+    transform: translateY(100%);
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: transform;
+}
+
+.box-overlay > p {
+    margin: 0;
+    padding: 63px 24px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.56;
+    letter-spacing: 0.03em;
+    color: var(--background);
+}
+
+.item a:hover .box-overlay {
+    transform: translateY(0);
 }
 
 .work-exaple .item:nth-child(3n) {
@@ -658,12 +819,16 @@ header .logo {
     height: 44px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));;
 
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1)
+
 }
 
 .footer-link .icon {
     fill: var(--background);
     width: 20px;
     height: 20px;
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-item:last-child {
